@@ -1377,7 +1377,10 @@ cmds.target=function(sin)
 		for port in get_router(rhost).used_ports
 			globals.expport=port.port_number
 			print(expport)
-			if typeof(expport) != "number" then return error("Invalid port")
+			if typeof(expport) != "number" then
+				print("Invalid port")
+				continue
+			end if
 			if sin.len == 2 then globals.args=sin[1]
 			if server.shell then
 				server.shell.launch("/root/rcon")
@@ -1387,7 +1390,10 @@ cmds.target=function(sin)
 			end if
 			globals.lmx=lmx
 			ns=mx.net_use(rhost,expport)
-			if not ns then return error("Cannot establish net session")
+			if not ns then
+				print("Cannot establish net session")
+				continue
+			end if
 			globals.ml=ns.dump_lib
 			if server.shell then
 				getExploits
