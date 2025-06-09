@@ -798,6 +798,19 @@ LunariumOS=function(input=null)
 					end if
 					COB.remove("returned")
 				end if
+			else
+				progPath = "/bin/" + comm
+				progFile = comp.File(progPath)
+				if progFile != null then
+					if args.len == 0 then
+						shell.launch(progPath)
+					else
+						shell.launch(progPath, args.join())
+					end if
+					break
+				else
+					print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Command not found</color>")
+				end if
 			end if
 		end while
 		if input then return
