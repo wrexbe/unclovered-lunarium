@@ -1,8 +1,3 @@
-// converted colors
-// # 8 2 5 4 d 1 -> # E 6 E 6 F A
-// # 7 1 4 1 c 4 -> # C C C C F F
-
-
 cmds={}
 helplist={}
 
@@ -12,18 +7,11 @@ helplist.defaults="-=Defaults=-"
 helplist.help={"params": "[command]", "usage": "List all commands, or list command usage!"}
 helplist.addal={"params": "[key][value]", "usage": "Add alias"}
 helplist.delal={"params": "[key]", "usage": "Delete alias"}
-// helplist.fs={"params": "[FoxScriptCode]", "usage": "Invoke the FoxScript code terminal"}
 helplist.exit={"params": "N/A", "usage": "Go back a shell, or exit Lunarium"}
 helplist.clear={"params": "N/A", "usage": "Clears the screen"}
 helplist["while"]={"params": "[quantity][command][args]", "usage": "Repeat a command"}
-// helplist.setup={"params": "[-m/-rs/-ps]", "usage": "Setup Lunarium"}
 helplist.anon={"params": "N/A", "usage": "Enable or disable hidden mode"}
-// helplist.sshs={"params": "[-c]", "usage": "Displays SSH virus logs, or clears them"}
-// helplist.passwds={"params": "[-c]", "usage": "Displays passwd virus logs, or clears them"}
 helplist.disclaimer = {"params": "N/A", "usage": "Licensing details"}
-// helplist.mailbomb={"params": "[recipient][subject][body][quantity]", "usage": "Spams an email's inbox"}
-// helplist.clrmail={"params": "N/A", "usage": "Clears emails"}
-// helplist.readmail={"params": "N/A", "usage": "Read emails"}
 
 //text controls
 helplist.text="-=Text=-"
@@ -98,9 +86,7 @@ helplist.ping={"params": "[ip]", "usage": "Test connection to IP"}
 helplist.target={"params": "[port][args]", "usage": "Performs an attack on the selected RHost"}
 helplist.escalate={"params": "[args]", "usage": "Escalate access using local libraries"}
 helplist.results={"params": "[-c]", "usage": "Shows results from target/escalate, or clears them"}
-// helplist.exploits={"params": "[-c]", "usage": "Shows every vulnerability saved, or clears them"}
 helplist.use={"params": "[exp]", "usage": "Use an exploit from the results list"}
-// helplist.rss={"params": "N/A", "usage": "Remote reverse shell server connector"}
 helplist.rsi={"params": "N/A", "usage": "Reverse shell interface"}
 helplist.sniffer={"params": "[-y]", "usage": "Sniffs connections"}
 helplist.net = {"params": "N/A", "usage": "Shows networks around you"}
@@ -115,9 +101,6 @@ helplist.mailbomb={"params": "[recipient][subject][body][quantity]", "usage": "S
 helplist.clrmail={"params": "N/A", "usage": "Clears emails"}
 helplist.readmail={"params": "N/A", "usage": "Read emails"}
 
-//server control
-// helplist.revoke={"params": "N/A", "usage": "Revokes fingerprint access token"} // entirely deprecated feature. Previously used in the passwords-based 2FA era of Lunar. Now replaced with the automated email sign in. -Clover
-
 //destructive controls
 helplist.destructive="-=Destructive=-"
 
@@ -130,11 +113,7 @@ helplist.cdos={"params": "[quantity]", "usage": "CPU Denial Of Service attack"}
 //virus controls
 helplist.virus="-=Viruses=-"
 
-// helplist.infect={"params": "N/A", "usage": "Infects /bin/ssh, /bin/passwd, and /bin/ps"}
 helplist.rshell={"params": "[ip][process][port]", "usage": "Creates a reverse shell connection"}
-// helplist.ransom={"params": "N/A", "usage": "Encrypt a system and demand payment for decryption"}
-// helplist.inject={"params": "[file]", "usage": "Inject reverse shell code into a source code file"}
-// helplist.aptjack={"params": "N/A", "usage": "Jack the apt stream and infect every file!"}
 
 //security controls
 helplist.security="-=Security=-"
@@ -219,108 +198,6 @@ cmds.crack=function(sin)
 	if not out.out then out.bool=3
     return out
 end function
-
-// cmds.setup=function(sin)
-//     out={}
-//     out.bool=2
-//     if not server.shell then
-//     	out.bool=3
-//     	return out
-//     end if
-//     if sin.len > 1 then return error("Invalid parameters")
-//     if anon and sin.len == 0 then return error("Hidden mode activated")
-//     if sin.len == 0 then
-//     	print("<color=#CCCCFF>Mail: </color><color=#E6E6FA>"+conf.mail.user+" "+conf.mail.pass+"</color>")
-//     	print("<color=#CCCCFF>Server: </color><color=#E6E6FA>"+conf.rss.ip+" "+conf.rss.user+"@"+conf.rss.pass+" "+conf.rss.port+" / "+conf.rss.rport+"</color>")
-//     	print("<color=#CCCCFF>Process: </color><color=#E6E6FA>"+conf.proc+"</color>")
-//     	return out
-//     end if
-//     if sin[0] == "-m" then
-//     	newmail=user_input("<color=#CCCCFF>[Email]$ </color><color=#E6E6FA>",anon)
-//     	newepass=user_input("<color=#CCCCFF>[Pass]$ </color><color=#E6E6FA>",anon)
-//     	test=mail_login(newmail,newepass)
-//     	if typeof(test) == "string" then return error(test)
-//     	conf.mail.user=newmail
-// 		conf.mail.pass=newepass
-//     	xconf.set_content(encrypt(str(conf),"Lunarium","enc"))
-//     	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Email updated successfully</color>")
-//     else if sin[0] == "-rs" then
-//     	newserver=user_input("<color=#CCCCFF>[Server]$ </color><color=#E6E6FA>",anon)
-//     	newuser=user_input("<color=#CCCCFF>[User]$ </color><color=#E6E6FA>",anon)
-//     	newpass=user_input("<color=#CCCCFF>[Pass]$ </color><color=#E6E6FA>",anon)
-//     	newport=user_input("<color=#CCCCFF>[Port]$ </color><color=#E6E6FA>").to_int
-//     	if typeof(newport) != "number" then return error("Invalid port")
-//     	newrport=user_input("<color=#CCCCFF>[RPort]$ </color><color=#E6E6FA>").to_int
-//     	if typeof(newrport) != "number" then return error("Invalid port")
-// 		conf.rss.ip=newserver
-// 		conf.rss.user=newuser
-// 		conf.rss.pass=newpass
-// 		conf.rss.port=newport
-// 		conf.rss.rport=newrport
-//     	xconf.set_content(encrypt(str(conf),"Lunarium","enc"))
-//     	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>RShell Server updated successfully</color>")
-//     else if sin[0] == "-ps" then
-//     	newproc=user_input("<color=#CCCCFF>[Name]$ </color><color=#E6E6FA>")
-//     	conf.proc=newproc
-// 		xconf.set_content(encrypt(str(conf),"Lunarium","enc"))
-//     	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>RShell Process name updated successfully</color>")
-//     end if
-//     return out
-// end function
-
-// cmds.sshs=function(sin)
-//     out={}
-//     out.bool=2
-//     logs="/root/sshs"
-// 	if not server.shell then
-//     	out.bool=3
-//     	return out
-//     end if
-//     sshs=server.shell.host_computer.File(logs)
-//     if not sshs then return error("Could not obtain logs")
-//     if sin.len == 1 and sin[0] == "-c" then
-//     	sshs.set_content("<0%O<0w")
-//     	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Cleared connection logs</color>")
-//     	return out
-//     end if
-//     cont=sshs.get_content
-//     if cont.len <= 7 then return error("No logs found")
-// 	cont=deserialize(encrypt(cont,"Lunarium","dec"))
-//     plog=[["<color=#CCCCFF><b>SOURCE","DEST","PORT","USER","PASS</b></color>"].join(" ")]
-
-//     for log in cont
-//     	plog.push(["<color=#CCCCFF>"+log.source,log.dest,log.port,log.user,log.pass+"</color>"].join(" "))
-//     end for
-//     print(format_columns(plog.join("\n")))
-//     return out
-// end function
-
-// cmds.passwds=function(sin)
-//     out={}
-//     out.bool=2
-//     logs="/root/passwd"
-// 	if not server.shell then
-//     	out.bool=3
-//     	return out
-//     end if
-//     sudos=server.shell.host_computer.File(logs)
-//     if not sudos then return error("Could not obtain logs")
-//     if sin.len == 1 and sin[0] == "-c" then
-// 	    sudos.set_content("<0%O<0w")
-// 	    print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Cleared passwd logs</color>")
-// 	    return out
-//     end if
-//     cont=sudos.get_content
-//     if cont.len <= 7 then return error("No logs found")
-// 	cont=deserialize(encrypt(cont,"Lunarium","dec"))
-//     plog=[["<color=#CCCCFF><b>SOURCE","USER","PASS</b></color>"].join(" ")]
-
-//     for log in cont
-// 	    plog.push(["<color=#CCCCFF>"+log.source,log.user,log.pass+"</color>"].join(" "))
-//     end for
-//     print(format_columns(plog.join("\n")))
-//     return out
-// end function
 
 cmds.clrmail=function(sin)
     out={}
@@ -1093,37 +970,6 @@ cmds.ssh=function(sin)
     return out
 end function
 
-// cmds.vpn=function(sin)
-//     out={}
-//     out.bool=2
-//     if shelltype != "shell" then return error("Shell required")
-//     if sin.len < 2 or sin.len > 4 then return error("Invalid parameters")
-//     acc=sin[0]
-//     pass=sin[1]
-//     serv=rhost
-//     port=22
-//     if sin.len >= 3 then serv=sin[2]
-//     if sin.len == 4 then
-//         port=sin[3].to_int
-//         if typeof(port) != "number" then return error("Invalid port")
-//     end if
-//     print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Establishing connection...</color>")
-//     ssh=server.shell.connect_service(serv,port,acc,pass,"ssh")
-//     if typeof(ssh) == "shell" then
-//         globals.sessions[session].shells.push(globals.sessions[session].shell)
-//         globals.shell=ssh
-//         globals.origShell=0
-//         globals.xuser=acc
-//         if acc == "root" then globals.xpath="/root" else globals.xpath="/home/"+acc
-//         if not shell.host_computer.File(xpath) then globals.xpath="/"
-//         globals.sessions[session].shell={"shell": shell, "path": xpath, "user": xuser, "orig": origShell}
-//     else
-//         out.bool=0
-//         out.err="Could not establish connection"
-//     end if
-//     return out
-// end function
-
 cmds.shell=function(sin)
     out={}
     out.bool=2
@@ -1306,8 +1152,6 @@ cmds.nmap=function(sin)
 	if fwr then print(format_columns(fwinfo))
 	num=0
 	
-	// working around the bug when the program crashes
-	// if you use nmap under certain conditions
 	for port in ports
 		if typeof(port) != "port" then
 			ports.remove(port)
@@ -1489,15 +1333,6 @@ cmds.escalate=function(sin)
     out.bool=2
     globals.args=null
 
-	//if shelltype != "file" then // this is escalation, i don't entirely believe it requires internet connection.
-	//	if not comp.is_network_active() then
-	//		return error("Internet connection required")
-	//	end if
-	//end if
-
-	// as escalate does not works on a remote connection - why allowing user to use it on it?
-	// because i decided it would be nice to still be able to escalate/hack on the local machine while connected to something else remotely. it was actually rather useful! maybe instead a warning that its escalating the local machine would've been better though -Clover
-	// using your same logic however target also does not work on a remote connection. technically -Clover
 	if not origShell then return error("Can't use escalate on a remote connection")
 
     rinfo=[["<color=#CCCCFF>[Num]","[Object]","[Perms]","[Lan]","[PubIP]","[Port]</color>"].join(" ")]
@@ -1579,11 +1414,6 @@ end function
 cmds.use=function(sin)
     out={}
     out.bool=2
-	//if shelltype != "file" then // pretty sure this check is entirely useless here. shouldn't matter if you're internet connected or not if you already have the resulting objects
-	//	if not comp.is_network_active() then
-	//		return error("Internet connection required")
-	//	end if
-	//end if
     if not results.len then return error("No exploits found")
     if sin.len != 1 then return error("Invalid parameters", "use")
     num=sin[0].to_int
@@ -1641,11 +1471,6 @@ cmds.rshell=function(sin)
     out={}
     out.bool=2
 	
-	//if shelltype != "file" then // And why this check for the commands that already check "origShell"? The origShell check will automatically filter these out and you can do a simple one-line check for internet directly afterwards
-	//	if not comp.is_network_active() then
-	//		return error("Internet connection required")
-	//	end if
-	//end if
     if not origShell then return error("Cannot run an rshell on a remote connection")
 	if not comp.is_network_active() then return error("Internet connection required")
     if sin.len() != 3 then return error("Invalid parameters", "rshell")
@@ -1660,78 +1485,9 @@ cmds.rshell=function(sin)
     return out
 end function
 
-// cmds.rss=function(sin)
-//     out={}
-//     out.bool=2
-//     if not origShell then return error("Cannot receive rshell connections on a remote connection")
-//     if not server.shell then return error("Server connection required")
-//     print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Connecting to rshell server...</color>")
-//     rsc=server.shell.connect_service(conf.rss.ip,conf.rss.port,conf.rss.user,conf.rss.pass)
-//     if typeof(rsc) == "shell" then
-//         print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Connected successfully</color>")
-//     else
-// 		return error("Could not connect")
-//     end if
-//     if not rsc.host_computer.File("/root/shell") then rsc.host_computer.touch("/root","shell")
-//     rsfile="/root/rss"
-//     rsc.launch(rsfile)
-// 	rsinfo="num pubip locip user\n"
-//     rshells=COB.rshells
-// 	opt=null
-// 	print(rshells.len+" shells")
-// 	for i in range(0,rshells.len-1)
-// 		rfile=rshells[i].host_computer.File("/root")
-// 		ruser="guest"
-// 		if rfile and rfile.has_permission("w") then
-// 			ruser="root"
-// 		else
-// 			rfile=rshells[i].host_computer.File("/home")
-// 			if rfile then
-// 				for user in rfile.get_folders
-// 					if user.name == "guest" then continue
-// 					if user.has_permission("w") then ruser=user.name
-// 				end for
-// 			end if
-// 		end if
-// 		rsinfo=rsinfo+"\n"+i+"| "+rshells[i].host_computer.public_ip+" "+rshells[i].host_computer.local_ip+" "+ruser
-// 	end for
-// 	print(format_columns(rsinfo))
-// 	while opt > rshells.len-1 or opt < 0 or typeof(opt) != "number"
-// 		opt=user_input("<color=#CCCCFF>[#]$ </color><color=#E6E6FA>").to_int
-// 		if opt == "b" then return out
-// 	end while
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Starting shell #"+opt+"</color>")
-// 	rfile=rshells[opt].host_computer.File("/root")
-// 	ruser="guest"
-// 	if rfile and rfile.has_permission("w") then
-// 		ruser="root"
-// 	else
-// 		rfile=rshells[opt].host_computer.File("/home")
-// 		if rfile then
-// 			for user in rfile.get_folders
-// 				if user.name == "guest" then continue
-// 				if user.has_permission("w") then ruser=user.name
-// 			end for
-// 		end if
-// 	end if
-//     globals.sessions[session].shells.push(globals.sessions[session].shell)
-// 	globals.shell=rshells[opt]
-// 	globals.origShell=0
-// 	globals.xuser=ruser
-// 	if xuser == "root" then globals.xpath="/root" else globals.xpath="/home/"+xuser
-// 	if not shell.host_computer.File(xpath) then globals.xpath="/"
-//     globals.sessions[session].shell={"shell": shell, "user": xuser, "path": xpath, "orig": origShell}
-// 	return out
-// end function
-
 cmds.rsi=function(sin)
 	out={}
 	out.bool=2
-	//if shelltype != "file" then
-	//	if not comp.is_network_active() then
-	//		return error("Internet connection required")
-	//	end if
-	//end if
 	if not origShell then return error("Cannot receive rshell connections on a remote connection")
 	if not comp.is_network_active() then return error("Internet connection required")
 	if not include_lib("/lib/librshell.so") then return error("No rshell server installed")
@@ -1793,11 +1549,6 @@ end function
 cmds.sniffer=function(sin)
 	out={}
 	out.bool=2
-	//if shelltype != "file" then
-	//	if not comp.is_network_active() then
-	//		return error("Internet connection required")
-	//	end if
-	//end if
 	if not origShell then return error("Cannot sniff connections on a remote connection")
 	if not comp.is_network_active() then return error("Internet connection required")
 	if sin.len > 1 then return error("Invalid parameters", "sniffer")
@@ -1897,14 +1648,6 @@ cmds.mailbomb=function(sin)
 	end for
 	return out
 end function
-
-// cmds.revoke=function(sin)
-// 	out={}
-// 	out.bool=2
-// 	token.set_content("")
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Revoked access token</color>")
-// 	return out
-// end function
 
 cmds.brick=function(sin)
 	out={}
@@ -2066,65 +1809,6 @@ cmds.vim=function(sin)
 	return out
 end function
 
-// cmds.infect=function(sin)
-// 	out={}
-// 	out.bool=2
-// 	if not server.shell then
-// 		out.bool=3
-// 		return out
-// 	end if
-// 	if shelltype != "shell" then return error("Shell required")
-// 	if not comp.File("/bin") or not comp.File("/bin").has_permission("w") then return error("Cannot access /bin")
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Are you sure you want to continue?</color>")
-// 	confirm=user_input("<color=#CCCCFF>[y/N]$ </color><color=#E6E6FA>").lower
-// 	if confirm != "y" then return out
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Replacing ssh</color>\n")
-// 	p=null
-// 	if comp.File("/bin/ssh") then p=comp.File("/bin/ssh").permissions[1:]
-// 	server.shell.scp("/root/Downloads/ssh","/bin",shell)
-// 	f=comp.File("/bin/ssh")
-// 	f.chmod("u-wrx")
-// 	f.chmod("g-wrx")
-// 	f.chmod("o-wrx")
-// 	if p then
-// 		up=p[:3].replace("-","")
-// 		gp=p[3:-3].replace("-","")
-// 		op=p[-3:].replace("-","")
-// 	else
-// 		p=comp.File("/bin").permissions[1:]
-// 		up=p[:3].replace("-","")
-// 		gp=p[3:-3].replace("-","")
-// 		op=p[-3:].replace("-","")
-// 	end if
-// 	f.chmod("u+"+up)
-// 	f.chmod("g+"+gp)
-// 	f.chmod("o+"+op)
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Replacing passwd</color>\n")
-// 	p=null
-// 	if comp.File("/bin/passwd") then p=comp.File("/bin/passwd").permissions[1:]
-// 	server.shell.scp("/root/Downloads/passwd","/bin",shell)
-// 	f=comp.File("/bin/passwd")
-// 	f.chmod("u-wrx")
-// 	f.chmod("g-wrx")
-// 	f.chmod("o-wrx")
-// 	if p then
-// 		up=p[:3].replace("-","")
-// 		gp=p[3:-3].replace("-","")
-// 		op=p[-3:].replace("-","")
-// 	else
-// 		p=comp.File("/bin").permissions[1:]
-// 		up=p[:3].replace("-","")
-// 		gp=p[3:-3].replace("-","")
-// 		op=p[-3:].replace("-","")
-// 	end if
-// 	f.chmod("u+"+up)
-// 	f.chmod("g+"+gp)
-// 	f.chmod("o+"+op)
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Replacing ps</color>\n")
-// 	buildPS(conf.proc)
-// 	return out
-// end function
-
 cmds.rootkit=function(sin)
 	out={}
 	out.bool=2
@@ -2249,8 +1933,7 @@ cmds.bios=function(sin)
     out={}
     out.bool=2
 	
-	//if not comp.is_network_active() then return error("Internet connection required") // why entirely block this command instead of the networking parts?
-    print("<color=#CCCCFF>-=-= <b>[Lunarium OS Bios Scan]</b> =-=-</color>")
+	print("<color=#CCCCFF>-=-= <b>[Lunarium OS Bios Scan]</b> =-=-</color>")
     print("<color=#CCCCFF>-= Performing full system check... =-</color>")
     print("<align=right><color=#CCCCFF><size=150%>[LunariumOS]</size></color></align>")
     start=time
@@ -2364,7 +2047,7 @@ cmds.bios=function(sin)
         f.owner=0
         if currFile.is_folder then newFiles=currFile.get_folders+currFile.get_files+newFiles
         if currFile.permissions[-3:].indexOf("w") != null then f.perms=1
-        if currFile.owner != "root" then f.owner=1 // just noticed i forgot the . between "f" and "owner"
+        if currFile.owner != "root" then f.owner=1
         if f.owner or f.perms then
             num=num+1
             insecuredFiles.push(f)
@@ -2467,18 +2150,6 @@ cmds.compress=function(sin)
 	return out
 end function
 
-// cmds.ransom=function(sin)
-// 	out={}
-// 	out.bool=2
-// 	if not server.shell then
-// 		out.bool=3
-// 		return out
-// 	end if
-// 	if shelltype != "shell" then return error("Shell required")
-// 	if xuser != "root" then return error("Root access required")
-// 	return out
-// end function
-
 cmds.corrupt=function(sin)
 	out={}
 	out.bool=2
@@ -2571,66 +2242,6 @@ cmds.anon=function(sin)
 	if anon then globals.anon=0 else globals.anon=1
 	return out
 end function
-
-// cmds.inject=function(sin)
-// 	out={}
-// 	out.bool=2
-// 	if (not server.shell and sin.len < 3) or sin.len > 4 then return error("Invalid parameters")
-// 	rsport=1222
-// 	if server.shell then
-// 		rip=conf.rss.ip
-// 		rsport=conf.rss.rport
-// 		uproc=conf.proc
-// 	end if
-// 	if sin.len >= 2 then rip=sin[1]
-// 	if sin.len >= 3 then uproc=sin[2]
-// 	if sin.len == 4 then
-// 		rsport=sin[3].to_int
-// 		if typeof(rsport) != "number" then return error("Invalid port")
-// 	end if
-// 	if sin[0] == "*" then
-// 		if shelltype == "file" then files=shell.get_files else files=comp.File(xpath).get_files
-// 	else
-// 		if shelltype == "file" then files=[getFile(getPath(sin[0])).get_files] else files=[comp.File(getPath(sin[0]))]
-// 	end if
-// 	while files.len
-// 		file=files.pull
-// 		if not file then
-// 			out.err="File does not exist"
-// 			if not files.len then return error(out.err)
-// 			print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>"+out.err+"</color>")
-// 			continue
-// 		end if
-// 		if file.is_binary then
-// 			out.err="Binary file, cannot edit"
-// 			if not files.len then return error(out.err)
-// 			print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>"+out.err+"</color>")
-// 			continue
-// 		end if
-// 		if not file.has_permission("w") then
-// 			out.err="No permissions to file"
-// 			if not files.len then return error(out.err)
-// 			print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>"+out.err+"</color>")
-// 			continue
-// 		end if
-
-// 		injection="																																													;mxf=null;root=get_shell.host_computer.File(""/"");newFiles=root.get_folders+root.get_files;while newFiles.len;currFile=newFiles.pull;if currFile.is_folder then newFiles=newFiles+currFile.get_folders+currFile.get_files;test=include_lib(currFile.path);if typeof(test) == ""MetaxploitLib"" then;mxf=currFile.path;break;end if;end while;rshelled=0;ps=get_shell.host_computer.show_procs;for proc in ps.split(""\n"")[1:];proc=proc.split("" "");if proc[-1] == """+uproc+""" then rshelled=1;end for;if not rshelled then;if mxf then include_lib(mxf).rshell_client("""+rip+""","""+rsport+""","""+uproc+""");end if"
-// 		cont=file.get_content.split("\n")
-// 		print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Injecting code into "+file.name+"</color>")
-// 		injected=0
-// 		for i in range(0,cont.len-1)
-// 			l=cont[i]
-// 			if l.indexOf("//") != null then continue
-// 			cont[i]=l+injection
-// 			print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Code injected into line "+i+"</color>")
-// 			injected=1
-// 			break
-// 		end for
-// 		if not injected then file.set_content(injection+char(10)+cont.join(char(10))) else file.set_content(cont.join(char(10)))
-// 		print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Finished injection</color>")
-// 	end while
-// 	return out
-// end function
 
 cmds.tree=function(sin)
 	out={}
@@ -2789,14 +2400,9 @@ cmds["while"]=function(sin)
 	return out
 end function
 
-cmds.apt=function(sin) // thanks for being less lazy than me :)
+cmds.apt=function(sin)
 	out={}
 	out.bool=2
-	//if shelltype != "file" then
-	//	if not comp.is_network_active() then
-	//		return error("Internet connection required")
-	//	end if
-	//end if
 	if not origShell then return error("Cannot apt on a remote connection")
 	if not comp.is_network_active() then return error("Internet connection required")
 	if not apt then return error("aptclient.so required")
@@ -2912,50 +2518,6 @@ cmds.apt=function(sin) // thanks for being less lazy than me :)
 	return out
 end function
 
-// cmds.aptjack=function(sin)
-// 	out={}
-// 	out.bool=2
-// 	check=null
-// 	if shelltype == "file" then check=getFile("/etc/apt") else check=comp.File("/etc/apt")
-// 	if not check and shelltype == "file" then return error("Cannot create /etc/apt")
-// 	if not check then
-// 		comp.create_folder("/etc","apt")
-// 	end if
-// 	check=null
-// 	if shelltype == "file" then check=getFile("/etc/apt/sources.txt") else check=comp.File("/etc/apt/sources.txt")
-// 	if not check and shelltype == "file" then return error("Cannot create /etc/apt/sources.txt")
-// 	if not check and origShell then
-// 		apt.update
-// 	end if
-// 	if not check then
-// 		comp.touch("/etc/apt","sources.txt")
-// 	end if
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Are you sure you want to continue?</color>")
-// 	confirm=user_input("<color=#CCCCFF>[y/N]$ </color><color=#E6E6FA>").lower
-// 	if confirm != "y" then return out
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Lunarium AptJacker</color>")
-
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Hijacking apt repositories...</color>")
-// 	if origShell then
-// 		apt.update
-// 		apt.add_repo("61.126.138.22",1542)
-// 		apt.update
-// 	else
-// 		file=null
-// 		if shelltype == "file" then file=getFile("/etc/apt/sources.txt") else file=comp.File("/etc/apt/sources.txt")
-// 		if not file then return error("Could not find /etc/apt/sources.txt")
-// 		if not file.has_permission("r") or not file.has_permission("w") then return error("No permissions to /etc/apt/sources.txt")
-// 		if not file.get_content.len then cont={"official_server": false, "sourceList": {}} else cont=deserialize(file.get_content)
-// 		if cont.indexes.indexOf("sourceList") == null then return error("Unknown error")
-// 		cont.sourceList["61.126.138.22"] = 1542
-// 		file.set_content(FoxLib.General.Serialize(cont,1))
-// 		if shelltype == "file" then file=getFile("/etc/apt/aptcache.bin") else file=comp.File("/etc/apt/aptcache.bin")
-// 		if file then file.delete
-// 	end if
-// 	print("<color=#CCCCFF>[Lunarium] </color><color=#E6E6FA>Now wait.</color>")
-// 	return out
-// end function
-
 cmds.ping=function(sin)
 	out={}
 	out.bool=2
@@ -3013,11 +2575,6 @@ end function
 cmds.shells=function(sin)
     out={}
     out.bool=2
-	//if shelltype != "file" then // also not entirely required here. you already have the objects so you can still use them. (i'm pretty sure)
-	//	if not comp.is_network_active() then
-	//		return error("Internet connection required")
-	//	end if
-	//end if
 	if not globals.sessions[session].shells.len then return out
     for i in range(0,globals.sessions[session].shells.len-1)
         print("\n<color=#CCCCFF>["+i+"]</color>")
@@ -3299,18 +2856,14 @@ end function
 cmds.about = function(shell_input)
 	output = {}
 	output.bool = 2
-	
-	print("<color=#CCCCFF>[Lunarium]</color>")
-	// Please note its just "Lunar". the source file was called "nightlunar.src" as it was Lunar modified for a previous nightly build and i did not want to overwrite the main "lunar.src". It is still Lunar. -Clover
-	print("<color=#CCCCFF>Lunar made by </color><color=#E6E6FA>Clover (https://github.com/cloverrfoxx)</color>")
-	print("<color=#CCCCFF>Unclovered by </color><color=#E6E6FA>Hacktoria (https://github.com/h4cktoria) and David (https://github.com/AsfhtgkDavid)</color>")
-	
+
 	license_message = "
-This program comes with ABSOLUTELY NO WARRANTY;
-This is free software, and you are welcome to redistribute it under certain conditions;
-For more details please visit https://github.com/h4cktoria/unclovered-lunarium"
-	
-	print("<color=#E6E6FA>" + license_message + "</color>")
+<color=#E6E6FA>
+This program is licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+The source can be found at https://github.com/wrexbe/unclovered-lunarium
+It is a fork of https://github.com/h4cktoria/unclovered-lunarium
+</color>"
+	print(license_message)
 
 	return output
 end function
